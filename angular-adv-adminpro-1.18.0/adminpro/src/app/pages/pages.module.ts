@@ -25,8 +25,12 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { CentrosComponent } from './mantenimientos/centros/centros.component';
 
 
-
-
+//importing components from angular material 
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from  '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -59,7 +63,13 @@ import { CentrosComponent } from './mantenimientos/centros/centros.component';
     SharedModule,
     RouterModule,
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    //material
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatTableModule
   ]
 })
 export class PagesModule { }
