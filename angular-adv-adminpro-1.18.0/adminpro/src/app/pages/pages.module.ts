@@ -31,6 +31,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from  '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
+import {PersonalComponent } from './mantenimientos/personal/personal.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import {MatTableModule} from '@angular/material/table';
     MedicoComponent,
     BusquedaComponent,
     CentrosComponent,
+    PersonalComponent,
   ],
   exports: [
     DashboardComponent,
@@ -69,7 +72,9 @@ import {MatTableModule} from '@angular/material/table';
     MatIconModule,
     MatDividerModule,
     MatDatepickerModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
+
   ]
 })
 export class PagesModule { }
