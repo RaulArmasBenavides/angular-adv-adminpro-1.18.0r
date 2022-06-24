@@ -23,7 +23,7 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { CentrosComponent } from './mantenimientos/centros/centros.component';
-
+import {PersonalComponent } from './mantenimientos/personal/personal.component';
 
 //importing components from angular material 
 import {MatButtonModule} from '@angular/material/button';
@@ -32,7 +32,7 @@ import {MatDividerModule} from  '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
-import {PersonalComponent } from './mantenimientos/personal/personal.component';
+
 
 @NgModule({
   declarations: [
@@ -74,7 +74,6 @@ import {PersonalComponent } from './mantenimientos/personal/personal.component';
     MatDatepickerModule,
     MatTableModule,
     MatSelectModule
-
   ]
 })
 export class PagesModule { }

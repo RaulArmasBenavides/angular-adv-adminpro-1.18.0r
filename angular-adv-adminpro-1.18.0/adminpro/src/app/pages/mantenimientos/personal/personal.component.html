@@ -1,6 +1,4 @@
-<p>personal works!</p>
 <div>
-
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     
       <!--- Note that these columns can be defined in any order.
@@ -24,24 +22,42 @@
         <td mat-cell *matCellDef="let element"> {{element.DNI}} </td>
       </ng-container>
     
-           <!-- Account Description Column -->
+      <!-- Account Description Column -->
       <ng-container matColumnDef="estatus_dot">
         <th mat-header-cell *matHeaderCellDef> ESTATUS </th>
         <!-- <mat-header-cell *matHeaderCellDef> ESTATUS </mat-header-cell> -->
-          <mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let element"> 
+          <!-- <mat-cell *matCellDef="let element"> -->
           <mat-form-field >
-          <mat-select style="min-width: 200px;" placeholder="" value="{{element.estatus_dot}}" >
-             <mat-option disabled *ngFor="let dep of acc_desc " value="{{dep.acc_desc}}" >
+          <mat-select  placeholder="" value="{{element.estatus_dot}}" >
+             <mat-option *ngFor="let dep of acc_desc " value="{{dep.acc_desc}}" >
                         {{ dep.acc_desc }}
             </mat-option>
           </mat-select>
           </mat-form-field>
-        </mat-cell>
+        </td>
+        <!-- </mat-cell> -->
       </ng-container>
-    
+
+      <!-- Tienda -->
+      <ng-container matColumnDef="tienda">
+        <th mat-header-cell *matHeaderCellDef> tienda </th>
+         <td mat-cell *matCellDef="let element"> {{element.tienda}} </td>
+      </ng-container>
       
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      	<!-- Group header -->
+    <ng-container matColumnDef="groupHeader">
+      <td colspan="999" mat-cell *matCellDef="let group">
+        <mat-icon *ngIf="group.expanded">expand_less</mat-icon>
+        <mat-icon *ngIf="!group.expanded">expand_more</mat-icon>
+        <strong>{{groupByColumns[group.level-1]}} = {{group[groupByColumns[group.level-1]]}}</strong> 
+        </td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)"> </tr>
     </table>
     </div>
      
