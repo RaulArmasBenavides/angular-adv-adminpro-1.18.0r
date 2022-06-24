@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: 'http://localhost:3000/api'
+  base_url: 'http://localhost:3000/api',
+  base_urltamb:'http://localhost:17476/WCFDotacion.svc'
 };
 
 /*

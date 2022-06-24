@@ -23,7 +23,9 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { CentrosComponent } from './mantenimientos/centros/centros.component';
-import {PersonalComponent } from './mantenimientos/personal/personal.component';
+import { PersonalComponent } from './mantenimientos/personal/personal.component';
+import { TemplateformComponent } from './mantenimientos/templateform/templateform.component';
+import { TiendasComponent } from './mantenimientos/tiendas/tiendas.component';
 
 //importing components from angular material 
 import {MatButtonModule} from '@angular/material/button';
@@ -32,6 +34,7 @@ import {MatDividerModule} from  '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
+
 
 
 @NgModule({
@@ -51,6 +54,8 @@ import {MatSelectModule} from '@angular/material/select';
     BusquedaComponent,
     CentrosComponent,
     PersonalComponent,
+    TemplateformComponent,
+    TiendasComponent,
   ],
   exports: [
     DashboardComponent,
