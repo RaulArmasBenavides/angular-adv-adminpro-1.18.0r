@@ -4,15 +4,36 @@ import { MatTableDataSource } from '@angular/material/table';
 //import { Personal } from '../../../interfaces/personal.interace';
 import { Personal } from '../../../models/personal.model';
 import { ControloperacionService } from '../../../services/controloperacion.service';
-// const ELEMENT_DATA: Personal[] = [
-//   {nombres: "Raúl Marcelo", apellidos: "Armas Benavides",DNI:"73262442", estatus_dot:"", tienda:"LIMTAMBO"},
-//   {nombres: "Ronnie Osmar", apellidos: "Oliva Moya",DNI:"73262441", estatus_dot:"", tienda:"MILITAR"},
-//   {nombres: "Dayana Yuliza", apellidos: "Armas Benavides",DNI:"73262443", estatus_dot:"", tienda:"LIMTAMBO"},
-//   {nombres: "Raúl Marcelo", apellidos: "Armas Calderón",DNI:"0324322", estatus_dot:"", tienda:"COMAS C1"},
-//   {nombres: "David Mauricio", apellidos: "Armas Quispe",DNI:"43242343", estatus_dot:"", tienda:"COMAS C2"},
-//   {nombres: "Mauricio Claude", apellidos: "Mulder Bedoya",DNI:"4344443", estatus_dot:"", tienda:"COMAS C2"}
-// ];
 
+const data = [
+  {
+    "acc_id": 1001,
+    "acc_desc": "Administration"
+  },
+
+  {
+    "acc_id": 1002,
+    "acc_desc": "Laboratory"
+  },
+
+  {
+    "acc_id": 1003,
+    "acc_desc": "Staff"
+  },
+
+  {
+    "acc_id": 1004,
+    "acc_desc": "Office-1"
+  },
+  {
+    "acc_id": 1005,
+    "acc_desc": "Office-2"
+  },
+  {
+    "acc_id": 1006,
+    "acc_desc": "Office-2"
+  }
+];
 
 class Group {
   level: number = 0;
@@ -32,93 +53,65 @@ class Group {
 
 export class PersonalComponent implements OnInit {
 
-  displayedColumns: string[] = ['Nombre', 'Apellidos', 'DNI','estatus_dot', 'tienda'];
-  public listapersonal: Personal[] = [];
-
-  //dataSource = new MatTableDataSource<Personal | Group>([]);
+  public isLoading: boolean = true;
+  displayedColumns: string[] = ['Nombre', 'Apellidos', 'DNI','estatus_dot', 'Tienda'];
+  public listapersonal = new MatTableDataSource<Personal | Group>([]);
   acc_desc: any;
-  groupByColumns: string[] = ['tienda'];
-  dataSource = this.listapersonal;
+  public groupByColumns: string[] = ['Tienda'];
+  private dataSource;
   constructor( private copservice: ControloperacionService) { }
 
   displayedColumns1 = ['acc_id', 'acc_desc'];
   ngOnInit(): void {
-
-    const data = [
-      {
-        "acc_id": 1001,
-        "acc_desc": "Administration"
-      },
-
-      {
-        "acc_id": 1002,
-        "acc_desc": "Laboratory"
-      },
-
-      {
-        "acc_id": 1003,
-        "acc_desc": "Staff"
-      },
-
-      {
-        "acc_id": 1004,
-        "acc_desc": "Office-1"
-      },
-      {
-        "acc_id": 1005,
-        "acc_desc": "Office-2"
-      },
-      {
-        "acc_id": 1006,
-        "acc_desc": "Office-2"
-      }
-   ];
      this.acc_desc = data;
      this.cargarPersonal();
      console.log("ok");
-    //this.dataSource.data = this.addGroups(this.listapersonal, this.groupByColumns);
-     //this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
+     this.dataSource = this.listapersonal;
+     console.log(this.listapersonal);
+     this.listapersonal.filterPredicate = this.customFilterPredicate.bind(this);
   }
 
   cargarPersonal() {
-
+    this.isLoading =true;
     this.copservice.cargarPersonal()
        .subscribe( (personal: Personal[]) => {
-         this.listapersonal = personal;
+        // this.listapersonal.data = personal;
+         this.isLoading =false;
+         this.listapersonal.data = this.addGroups(personal, this.groupByColumns);
          console.log(personal);
       })
 
   }
 
-  // customFilterPredicate(data: Personal | Group, filter: string): boolean {
-  //   return (data instanceof Group) ? data.visible : this.getDataRowVisible(data);
-  // }
+  customFilterPredicate(data: Personal | Group, filter: string): boolean {
+     return (data instanceof Group) ? data.visible : this.getDataRowVisible(data);
+  }
 
-  // getDataRowVisible(data: Personal): boolean {
-  //   const groupRows = this.dataSource.data.filter(
-  //     row => {
-  //       if (!(row instanceof Group)) return false;
+  getDataRowVisible(data: Personal): boolean {
+    const groupRows = this.dataSource.data.filter(
+       row => {
+         if (!(row instanceof Group)) return false;
         
-  //       let match = true;
-  //       this.groupByColumns.forEach(
-  //         column => {
-  //           if (!row[column] || !data[column] || row[column] !== data[column]) match = false;
-  //         }
-  //       );
-  //       return match;
-  //     }
-  //   );
+        let match = true;
+        this.groupByColumns.forEach(
+          column => {
+            if (!row[column] || !data[column] || row[column] !== data[column]) match = false;
+          }
+         );
+        return match;
+      }
+     );
 
-  //   if (groupRows.length === 0) return true;
-  //   if (groupRows.length > 1) throw "Data row is in more than one group!";
-  //   const parent = <Group>groupRows[0];  // </Group> (Fix syntax coloring)
+     if (groupRows.length === 0) return true;
+     if (groupRows.length > 1) throw "Data row is in more than one group!";
+     const parent = <Group>groupRows[0];  // </Group> (Fix syntax coloring)
 
-  //   return parent.visible && parent.expanded;
-  // }
+     return parent.visible && parent.expanded;
+   }
 
   groupHeaderClick(row) {
     row.expanded = !row.expanded
-    //this.dataSource.filter = performance.now().toString();  // hack to trigger filter refresh
+    this.listapersonal.filter = performance.now().toString();  // hack to trigger filter refresh
   }
 
   addGroups(data: Personal[], groupByColumns: string[]): any[] {

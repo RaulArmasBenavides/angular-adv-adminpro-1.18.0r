@@ -11,7 +11,7 @@ export class Personal {
         public estado:string,
         public estatus_dot:string,
         public Cargo:string,
-        public tienda:string,
+        public Tienda:string,
         public img?: string
     ) {}
 

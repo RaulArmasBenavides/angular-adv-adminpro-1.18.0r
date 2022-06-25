@@ -1,5 +1,5 @@
-<div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div  *ngIf="!isLoading">
+    <table mat-table [dataSource]="listapersonal" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
     
@@ -39,9 +39,9 @@
       </ng-container>
 
       <!-- Tienda -->
-      <ng-container matColumnDef="tienda">
-        <th mat-header-cell *matHeaderCellDef> tienda </th>
-         <td mat-cell *matCellDef="let element"> {{element.tienda}} </td>
+      <ng-container matColumnDef="Tienda">
+        <th mat-header-cell *matHeaderCellDef> Tienda </th>
+         <td mat-cell *matCellDef="let element"> {{element.Tienda}} </td>
       </ng-container>
       
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -58,5 +58,18 @@
 
     <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)"> </tr>
     </table>
-    </div>
+</div>
      
+
+<div class="row animated fadeIn fast"
+    *ngIf="isLoading">
+    <div class="col-12">
+        
+        <div class="alert alert-info text-center">
+          <h4 class="alert-heading">Cargando</h4>
+          <i class="fa fa-spin fa-refresh fa-2x"></i>
+          <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div> 

@@ -106,9 +106,6 @@ export class MedicoComponent implements OnInit {
             this.router.navigateByUrl(`/dashboard/medico/${ resp.medico._id }`)
         })
     }
-
-
-
   }
 
 }
