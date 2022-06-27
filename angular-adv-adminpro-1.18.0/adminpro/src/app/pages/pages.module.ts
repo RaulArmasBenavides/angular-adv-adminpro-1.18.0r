@@ -26,6 +26,7 @@ import { CentrosComponent } from './mantenimientos/centros/centros.component';
 import { PersonalComponent } from './mantenimientos/personal/personal.component';
 import { TemplateformComponent } from './mantenimientos/templateform/templateform.component';
 import { TiendasComponent } from './mantenimientos/tiendas/tiendas.component';
+import { TiendaComponent } from './mantenimientos/tiendas/tienda.component';
 
 //importing components from angular material 
 import {MatButtonModule} from '@angular/material/button';
@@ -59,6 +60,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PersonalComponent,
     TemplateformComponent,
     TiendasComponent,
+    TiendaComponent,
   ],
   exports: [
     DashboardComponent,
