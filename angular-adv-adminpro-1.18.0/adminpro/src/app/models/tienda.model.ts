@@ -17,3 +17,27 @@ export class Tienda {
 
 }
 
+export class Control {
+
+    constructor(
+        public nombre: string,
+        public jefe_zonal:string,
+        public dot_teo_ft:number,
+        public dot_teo_pt:number,
+        public NManosenTienda:number,
+        public NEntradas:number,
+        public NSalidas:number
+    ) {}
+
+}
+
+
+export class Group {
+    level: number = 0;
+    parent: Group;
+    expanded: boolean = true;
+    get visible(): boolean {
+      return !this.parent || (this.parent.visible && this.parent.expanded);
+    }
+  }
+  

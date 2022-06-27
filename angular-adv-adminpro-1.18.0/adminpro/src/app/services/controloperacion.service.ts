@@ -42,6 +42,16 @@ export class ControloperacionService {
     const url = `${ base_url }/Tienda/TiendaActualizar`;
     return this.http.put( url, tienda);//, this.headers );
   }
+  //CONTROL
+  cargarControl() {
+    const url = `${ base_url }/Tienda/TiendasControl`;
+    return this.http.get( url)
+              .pipe(
+                map( (resp: {codigo: boolean, listajson: Tienda[] }) => resp.listajson )
+              );
+  }
+
+  
 
   //PERSONAL
   cargarPersonal() {
@@ -50,11 +60,11 @@ export class ControloperacionService {
     return this.http.get( url)
               .pipe(
                 map( (resp: {codigo: boolean, listajson: Personal[] }) => resp.listajson )
-                // map( response => {
-                //   console.log(response);
-                // } )
               );
   }
+
+
+
 
 
 }

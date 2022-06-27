@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 //import { Personal } from '../../../interfaces/personal.interace';
 import { Personal } from '../../../models/personal.model';
 import { ControloperacionService } from '../../../services/controloperacion.service';
+import { Group} from 'src/app/models/tienda.model';
 
 const data = [
   {
@@ -35,14 +36,6 @@ const data = [
   }
 ];
 
-class Group {
-  level: number = 0;
-  parent: Group;
-  expanded: boolean = true;
-  get visible(): boolean {
-    return !this.parent || (this.parent.visible && this.parent.expanded);
-  }
-}
 
 @Component({
   selector: 'app-personal',
@@ -54,7 +47,7 @@ class Group {
 export class PersonalComponent implements OnInit {
 
   public isLoading: boolean = true;
-  displayedColumns: string[] = ['Nombre', 'Apellidos', 'DNI','Cargo','estatus_dot', 'Tienda'];
+  displayedColumns: string[] = ['Nombre', 'Apellidos', 'DNI','Cargo','estatus_dot', 'Tienda','actions'];
   public listapersonal = new MatTableDataSource<Personal | Group>([]);
   acc_desc: any;
   public groupByColumns: string[] = ['Tienda'];
@@ -165,6 +158,11 @@ private paginator: MatPaginator;
   isGroup(index, item): boolean {
     return item.level;
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.listapersonal.filter = filterValue.trim().toLowerCase();
+}
 
   
 

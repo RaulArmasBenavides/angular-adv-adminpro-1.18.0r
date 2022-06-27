@@ -24,9 +24,9 @@ import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { CentrosComponent } from './mantenimientos/centros/centros.component';
 import { PersonalComponent } from './mantenimientos/personal/personal.component';
-import { TemplateformComponent } from './mantenimientos/templateform/templateform.component';
 import { TiendasComponent } from './mantenimientos/tiendas/tiendas.component';
 import { TiendaComponent } from './mantenimientos/tiendas/tienda.component';
+ 
 
 //importing components from angular material 
 import {MatButtonModule} from '@angular/material/button';
@@ -39,6 +39,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ControlComponent } from './mantenimientos/control/control.component';
 
 
 @NgModule({
@@ -58,9 +59,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BusquedaComponent,
     CentrosComponent,
     PersonalComponent,
-    TemplateformComponent,
     TiendasComponent,
     TiendaComponent,
+    ControlComponent
   ],
   exports: [
     DashboardComponent,

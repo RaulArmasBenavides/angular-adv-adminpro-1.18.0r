@@ -21,8 +21,9 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { AdminGuard } from '../guards/admin.guard';
 import { CentrosComponent } from './mantenimientos/centros/centros.component';
 import { PersonalComponent } from './mantenimientos/personal/personal.component';
-import { TemplateformComponent } from './mantenimientos/templateform/templateform.component';
+import { RequerimientoComponent } from './mantenimientos/requerimiento/requerimiento.component';
 import { TiendasComponent } from './mantenimientos/tiendas/tiendas.component';
+import { ControlComponent } from './mantenimientos/control/control.component';
 
 
 
@@ -48,8 +49,9 @@ const routes: Routes = [
             { path: 'centros', component: CentrosComponent, data: { titulo: 'Centros de vacunación' }},
             { path: 'personal', component: PersonalComponent, data: { titulo: 'Personal dotación' }},
             { path: 'tiendas', component: TiendasComponent, data: { titulo: 'Tiendas Tambo' }},
+            { path: 'control', component: ControlComponent, data: { titulo: 'Control de dotación' }},
             //formularios 
-            { path: 'templateform', component: TemplateformComponent, data: { titulo: 'Registro de requerimientos1'}},
+            { path: 'requerimientos', component: RequerimientoComponent, data: { titulo: 'Requerimientos'}},
             // Rutas de Admin
             { path: 'usuarios', canActivate: [ AdminGuard ], component: UsuariosComponent, data: { titulo: 'Matenimiento de Usuarios' }},
         ]
