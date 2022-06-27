@@ -14,15 +14,21 @@ export class ControloperacionService {
 
   constructor(private http: HttpClient) { }
 
+  //SINCRONIZACIÓN CON GEOVICTORIA 
+  SyncGeoVictoriaData() {
+    const url = `${ base_url }/Empleado/SyncGeoVictoriaAsync`;
+    return this.http.get( url)
+              .pipe(
+                map( (resp: {codigo: boolean }) => resp.codigo )
+              );
+  }
+
   //TIENDAS
   cargarTiendas() {
     const url = `${ base_url }/Tienda/TiendaListar`;
     return this.http.get( url)
               .pipe(
                 map( (resp: {codigo: boolean, listajson: Tienda[] }) => resp.listajson )
-                // map( response => {
-                //   console.log(response);
-                // } )
               );
   }
 
@@ -36,7 +42,6 @@ export class ControloperacionService {
     const url = `${ base_url }/Tienda/TiendaActualizar`;
     return this.http.put( url, tienda);//, this.headers );
   }
-
 
   //PERSONAL
   cargarPersonal() {

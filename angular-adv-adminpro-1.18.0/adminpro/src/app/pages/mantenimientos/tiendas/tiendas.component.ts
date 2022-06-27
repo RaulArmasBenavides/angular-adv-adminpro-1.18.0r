@@ -9,7 +9,7 @@ import { ControloperacionService } from '../../../services/controloperacion.serv
 export class TiendasComponent implements OnInit {
 
   public tiendas: Tienda[] = [];
-  constructor( private copservice: ControloperacionService,) { }
+  constructor( private copservice: ControloperacionService) { }
 
   ngOnInit(): void {
     this.cargarTienda();
