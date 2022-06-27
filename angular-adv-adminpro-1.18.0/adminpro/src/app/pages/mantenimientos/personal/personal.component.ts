@@ -1,6 +1,6 @@
-import { DataSource } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 //import { Personal } from '../../../interfaces/personal.interace';
 import { Personal } from '../../../models/personal.model';
 import { ControloperacionService } from '../../../services/controloperacion.service';
@@ -54,31 +54,36 @@ class Group {
 export class PersonalComponent implements OnInit {
 
   public isLoading: boolean = true;
-  displayedColumns: string[] = ['Nombre', 'Apellidos', 'DNI','estatus_dot', 'Tienda'];
+  displayedColumns: string[] = ['Nombre', 'Apellidos', 'DNI','Cargo','estatus_dot', 'Tienda'];
   public listapersonal = new MatTableDataSource<Personal | Group>([]);
   acc_desc: any;
   public groupByColumns: string[] = ['Tienda'];
-  private dataSource;
   constructor( private copservice: ControloperacionService) { }
 
   displayedColumns1 = ['acc_id', 'acc_desc'];
+  //@ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
+private paginator: MatPaginator;
+
+@ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+  this.paginator = mp;
+  this.listapersonal.paginator = this.paginator;
+}
+
   ngOnInit(): void {
      this.acc_desc = data;
      this.cargarPersonal();
-     console.log("ok");
-     this.dataSource = this.listapersonal;
-     console.log(this.listapersonal);
      this.listapersonal.filterPredicate = this.customFilterPredicate.bind(this);
+     this.listapersonal.paginator =  this.paginator;
   }
 
   cargarPersonal() {
     this.isLoading =true;
     this.copservice.cargarPersonal()
        .subscribe( (personal: Personal[]) => {
-        // this.listapersonal.data = personal;
+         this.listapersonal.data = personal;
          this.isLoading =false;
          this.listapersonal.data = this.addGroups(personal, this.groupByColumns);
-         console.log(personal);
       })
 
   }
@@ -88,7 +93,7 @@ export class PersonalComponent implements OnInit {
   }
 
   getDataRowVisible(data: Personal): boolean {
-    const groupRows = this.dataSource.data.filter(
+    const groupRows = this.listapersonal.data.filter(
        row => {
          if (!(row instanceof Group)) return false;
         
@@ -114,12 +119,12 @@ export class PersonalComponent implements OnInit {
     this.listapersonal.filter = performance.now().toString();  // hack to trigger filter refresh
   }
 
-  addGroups(data: Personal[], groupByColumns: string[]): any[] {
+  addGroups(data: Personal[], groupByColumns: string[]): Personal[] {
     var rootGroup = new Group();
     return this.getSublevel(data, 0, groupByColumns, rootGroup);
   }
 
-  getSublevel(data: any[], level: number, groupByColumns: string[], parent: Group): any[] {
+  getSublevel(data: Personal[], level: number, groupByColumns: string[], parent: Group): Personal[] {
     // Recursive function, stop when there are no more levels. 
     if (level >= groupByColumns.length)
       return data;

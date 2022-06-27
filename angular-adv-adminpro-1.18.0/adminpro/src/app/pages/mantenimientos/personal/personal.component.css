@@ -1,3 +1,8 @@
+
+#headertitle{
+  display: flex;
+}
+
 table{
     width: 100%;
    }

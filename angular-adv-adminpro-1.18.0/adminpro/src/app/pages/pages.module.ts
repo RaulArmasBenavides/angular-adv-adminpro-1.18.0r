@@ -34,7 +34,10 @@ import {MatDividerModule} from  '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -78,7 +81,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatDividerModule,
     MatDatepickerModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule
   ]
 })
 export class PagesModule { }

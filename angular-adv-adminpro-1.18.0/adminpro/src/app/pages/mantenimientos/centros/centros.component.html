@@ -127,27 +127,28 @@
 
 <div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!-- nombre -->
-  <ng-container matColumnDef="nombre">
+  <!-- codigo -->
+  <ng-container matColumnDef="codigo">
     <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
   </ng-container>
 
-  <!-- direccion -->
-  <ng-container matColumnDef="direccion">
-    <th mat-header-cell *matHeaderCellDef> Dirección </th>
-    <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+  <!-- descripcion -->
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef> descripcion </th>
+    <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
   </ng-container>
 
-  <!-- distrito -->
-  <ng-container matColumnDef="distrito">
-    <th mat-header-cell *matHeaderCellDef> Distrito </th>
-    <td mat-cell *matCellDef="let element"> {{element.distrito}} </td>
+  <!-- precio -->
+  <ng-container matColumnDef="precio">
+    <th mat-header-cell *matHeaderCellDef> precio </th>
+    <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<mat-paginator [length]="1000" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
  
 

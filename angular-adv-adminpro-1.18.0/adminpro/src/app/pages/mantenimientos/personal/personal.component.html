@@ -20,6 +20,12 @@
         <th mat-header-cell *matHeaderCellDef> DNI </th>
         <td mat-cell *matCellDef="let element"> {{element.DNI}} </td>
       </ng-container>
+
+      <!-- Cargo -->
+      <ng-container matColumnDef="Cargo">
+         <th mat-header-cell *matHeaderCellDef> Cargo </th>
+         <td mat-cell *matCellDef="let element"> {{element.Cargo}} </td>
+      </ng-container>
     
       <!-- Account Description Column -->
       <ng-container matColumnDef="estatus_dot">
@@ -46,18 +52,23 @@
       
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
       	<!-- Group header -->
-    <ng-container matColumnDef="groupHeader">
+    <ng-container matColumnDef="groupHeader" id="headertitle">
       <td colspan="999" mat-cell *matCellDef="let group">
         <mat-icon *ngIf="group.expanded">expand_less</mat-icon>
         <mat-icon *ngIf="!group.expanded">expand_more</mat-icon>
         <strong>{{groupByColumns[group.level-1]}} = {{group[groupByColumns[group.level-1]]}}</strong> 
+        <strong>Nro.Requerimientos ##</strong>
+        <strong>FT. ##</strong>
+        <strong>PT. ##</strong>
         </td>
     </ng-container>
-
     <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)"> </tr>
     </table>
+    <mat-paginator [length]="2000"
+    [pageSize]="5"
+    [pageSizeOptions]="[20, 50, 100, 150]">
+</mat-paginator>
 </div>
      
 
