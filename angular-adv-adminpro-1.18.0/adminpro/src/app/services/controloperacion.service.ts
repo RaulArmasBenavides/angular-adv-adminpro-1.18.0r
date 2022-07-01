@@ -14,6 +14,16 @@ export class ControloperacionService {
 
   constructor(private http: HttpClient) { }
 
+
+  get headers() {
+    return {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  }
+
+
   //SINCRONIZACIÓN CON GEOVICTORIA 
   SyncGeoVictoriaData() {
     const url = `${ base_url }/Empleado/SyncGeoVictoriaAsync`;
@@ -34,9 +44,14 @@ export class ControloperacionService {
 
   obtenerTiendaPorId( id: number ) {
     console.log("test");
+    console.log(JSON.stringify(id));
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(id);
     const url = `${ base_url }/Tienda/TiendaBuscar`;
-    let res =  this.http.post( url,id);//, this.headers );
-    console.log(res);
+    let res =  this.http.post( url,'{\n	"id":{id},\n}',{'headers':headers}) 
+    .pipe(
+      map( (resp: {Codigo: boolean, Entidad: Tienda }) => resp.Entidad )
+    )
     return res;
   }
 
@@ -59,8 +74,6 @@ export class ControloperacionService {
               );
   }
 
-  
-
   //PERSONAL
   cargarPersonal() {
 
@@ -70,9 +83,5 @@ export class ControloperacionService {
                 map( (resp: {codigo: boolean, listajson: Personal[] }) => resp.listajson )
               );
   }
-
-
-
-
 
 }
