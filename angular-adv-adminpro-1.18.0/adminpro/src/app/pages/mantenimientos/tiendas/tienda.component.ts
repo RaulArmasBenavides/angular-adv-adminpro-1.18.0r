@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Tienda } from 'src/app/models/tienda.model';
 import { ControloperacionService } from '../../../services/controloperacion.service';
-
 import Swal from 'sweetalert2';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tienda',
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class TiendaComponent implements OnInit {
   public tiendaForm: FormGroup;
-  public hospitales: Tienda[] = [];
+  public tiendas: Tienda[] = [];
   
   public tiendaSeleccionada: Tienda;
  
@@ -25,30 +25,69 @@ export class TiendaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  
+  console.log('test');
+  this.activatedRoute.params
+  .subscribe( ({ idTienda }) => this.cargarDatosTienda( idTienda ) );
+
+
+  this.tiendaForm = this.fb.group({
+    Nombre: ['', Validators.required ],
+    // hospital: ['', Validators.required ],
+  });
+
+  //this.cargarHospitales();
+
+  this.tiendaForm.get('tienda').valueChanges
+      .subscribe( hospitalId => {
+        this.tiendaSeleccionada = this.tiendas.find( h => h.idTienda === hospitalId );
+      })
+
   }
 
+  cargarDatosTienda(id: string) {
+
+    if ( id === 'nuevo' ) {
+      return;
+    }
+    
+     this.copservice.obtenerTiendaPorId( id )
+      .pipe(
+        delay(100)
+      )
+      .subscribe( tienda => {
+
+        if ( !tienda ) {
+          return this.router.navigateByUrl(`/dashboard/tiendas`);
+        }
+
+        const { Nombre,dot_teo_pt,dot_teo_ft,Direccion,Distrito } = tienda; 
+        this.tiendaSeleccionada = tienda;
+        this.tiendaForm.setValue({ Nombre,dot_teo_pt,dot_teo_ft,Direccion,Distrito });
+      });
+
+  }
 
   guardarTienda() {
 
     const { nombre } = this.tiendaForm.value;
 
     if ( this.tiendaSeleccionada ) {
-      // actualizar
+       //actualizar Tienda
       const data = {
         ...this.tiendaForm.value,
         _id: this.tiendaSeleccionada.idTienda
       }
       this.copservice.ActualizarTienda( data )
         .subscribe( resp => {
-          Swal.fire('Actualizado', `${ nombre } actualizado correctamente`, 'success');
+          Swal.fire('Actualizada', `${ nombre } actualizado correctamente`, 'success');
         })
 
     } else {
-      // crear
-      
+      // registrar Tienda
       this.copservice.RegistrarTienda( this.tiendaForm.value )
           .subscribe( (resp: any) => {
-            Swal.fire('Creado', `${ nombre } creado correctamente`, 'success');
+            Swal.fire('Creada', `${ nombre } creado correctamente`, 'success');
             this.router.navigateByUrl(`/dashboard/medico/${ resp.medico._id }`)
         })
     }

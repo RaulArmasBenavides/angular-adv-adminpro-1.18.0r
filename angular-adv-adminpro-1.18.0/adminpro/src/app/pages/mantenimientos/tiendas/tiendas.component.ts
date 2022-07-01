@@ -13,7 +13,7 @@ export class TiendasComponent implements OnInit {
   //public tiendas: Tienda[] = [];
   public tiendas = new MatTableDataSource<Tienda>([]);
   public isLoading: boolean = true;
-  displayedColumns: string[] = ['Nombre', 'dot_teo_ft', 'dot_teo_pt','jefe_zonal','Distrito', 'Direccion'];
+  displayedColumns: string[] = ['Nombre', 'dot_teo_ft', 'dot_teo_pt','jefe_zonal','Distrito', 'Direccion','actions'];
   constructor( private copservice: ControloperacionService) { }
 
 private paginator: MatPaginator;

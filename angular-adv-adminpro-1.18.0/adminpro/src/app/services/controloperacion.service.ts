@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
-import { Tienda } from '../models/tienda.model';
+import { Tienda,Control } from '../models/tienda.model';
 import { Personal } from '../models/personal.model';
 const base_url = environment.base_urltamb;
 
@@ -32,6 +32,14 @@ export class ControloperacionService {
               );
   }
 
+  obtenerTiendaPorId( id: string ) {
+    const url = `${ base_url }/medicos/${ id }`;
+    return this.http.get( url)//, this.headers )
+              .pipe(
+                map( (resp: {ok: boolean, tienda: Tienda }) => resp.tienda )
+              );
+  }
+
   RegistrarTienda( tienda: { Nombre: string, dot_teo_pt: number,dot_teo_ft:number,jefe_zonal:string,Direccion:string,iddistrito:number } ) {
     const url = `${ base_url }/Tienda/TiendaAdicionar`;
     return this.http.post( url, tienda);//, this.headers );
@@ -47,7 +55,7 @@ export class ControloperacionService {
     const url = `${ base_url }/Tienda/TiendasControl`;
     return this.http.get( url)
               .pipe(
-                map( (resp: {codigo: boolean, listajson: Tienda[] }) => resp.listajson )
+                map( (resp: {codigo: boolean, listajson: Control[] }) => resp.listajson )
               );
   }
 

@@ -23,6 +23,7 @@ import { CentrosComponent } from './mantenimientos/centros/centros.component';
 import { PersonalComponent } from './mantenimientos/personal/personal.component';
 import { RequerimientoComponent } from './mantenimientos/requerimiento/requerimiento.component';
 import { TiendasComponent } from './mantenimientos/tiendas/tiendas.component';
+import { TiendaComponent } from './mantenimientos/tiendas/tienda.component';
 import { ControlComponent } from './mantenimientos/control/control.component';
 
 
@@ -49,6 +50,7 @@ const routes: Routes = [
             { path: 'centros', component: CentrosComponent, data: { titulo: 'Centros de vacunación' }},
             { path: 'personal', component: PersonalComponent, data: { titulo: 'Personal dotación' }},
             { path: 'tiendas', component: TiendasComponent, data: { titulo: 'Tiendas Tambo' }},
+            { path: 'tienda/:idTienda', component: TiendaComponent, data: { titulo: 'Matenimiento de Tienda' }},
             { path: 'control', component: ControlComponent, data: { titulo: 'Control de dotación' }},
             //formularios 
             { path: 'requerimientos', component: RequerimientoComponent, data: { titulo: 'Requerimientos'}},

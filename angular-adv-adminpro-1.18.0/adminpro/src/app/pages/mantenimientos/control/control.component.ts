@@ -13,8 +13,8 @@ import { Group} from 'src/app/models/tienda.model';
 })
 export class ControlComponent implements OnInit {
   public isLoading: boolean = true;
-  public tiendascontrol = new MatTableDataSource<Control>([]);
-  displayedColumns: string[] = ['Nombre', 'dot_teo_ft', 'dot_teo_pt','jefe_zonal','Distrito', 'Direccion'];
+  public tiendascontrol = new MatTableDataSource<Control | Group>([]);
+  displayedColumns: string[] = ['Nombre', 'dot_teo_ft', 'dot_teo_pt','jefe_zonal','ManosenTienda', 'Entradas','Salidas'];
   public groupByColumns: string[] = ['jefe_zonal'];
   constructor( private copservice: ControloperacionService) { }
   private paginator: MatPaginator;
