@@ -20,11 +20,11 @@ import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { AdminGuard } from '../guards/admin.guard';
 import { CentrosComponent } from './mantenimientos/centros/centros.component';
-import { PersonalComponent } from './mantenimientos/personal/personal.component';
-import { RequerimientoComponent } from './mantenimientos/requerimiento/requerimiento.component';
-import { TiendasComponent } from './mantenimientos/tiendas/tiendas.component';
-import { TiendaComponent } from './mantenimientos/tiendas/tienda.component';
-import { ControlComponent } from './mantenimientos/control/control.component';
+import { PersonalComponent } from './dotacion/personal/personal.component';
+import { RequerimientoComponent } from './dotacion/requerimiento/requerimiento.component';
+import { TiendasComponent } from './dotacion/tiendas/tiendas.component';
+import { TiendaComponent } from './dotacion/tiendas/tienda.component';
+import { ControlComponent } from './dotacion/control/control.component';
 
 
 

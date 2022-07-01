@@ -14,5 +14,5 @@
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
-, "src/app/pages/mantenimientos/requerimiento/requerimiento.component.ts"  ]
+, "src/app/pages/dotacion/requerimiento/requerimiento.component.ts"  ]
 }

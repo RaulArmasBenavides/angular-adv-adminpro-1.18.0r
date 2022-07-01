@@ -23,9 +23,9 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { CentrosComponent } from './mantenimientos/centros/centros.component';
-import { PersonalComponent } from './mantenimientos/personal/personal.component';
-import { TiendasComponent } from './mantenimientos/tiendas/tiendas.component';
-import { TiendaComponent } from './mantenimientos/tiendas/tienda.component';
+import { PersonalComponent } from './dotacion/personal/personal.component';
+import { TiendasComponent } from './dotacion/tiendas/tiendas.component';
+import { TiendaComponent } from './dotacion/tiendas/tienda.component';
  
 
 //importing components from angular material 
@@ -39,7 +39,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ControlComponent } from './mantenimientos/control/control.component';
+import { ControlComponent } from './dotacion/control/control.component';
 
 
 @NgModule({
