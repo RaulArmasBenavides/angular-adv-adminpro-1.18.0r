@@ -26,28 +26,37 @@ export class TiendaComponent implements OnInit {
 
   ngOnInit(): void {
   
-  console.log('test');
   this.activatedRoute.params
   .subscribe( ({ idTienda }) => this.cargarDatosTienda( idTienda ) );
 
 
   this.tiendaForm = this.fb.group({
     Nombre: ['', Validators.required ],
+    Direccion : ['' ],
     // hospital: ['', Validators.required ],
   });
 
-  //this.cargarHospitales();
+  this.cargarTiendas();
 
-  this.tiendaForm.get('tienda').valueChanges
-      .subscribe( hospitalId => {
-        this.tiendaSeleccionada = this.tiendas.find( h => h.idTienda === hospitalId );
+  // this.tiendaForm.get('tienda').valueChanges
+  //     .subscribe( hospitalId => {
+  //       this.tiendaSeleccionada = this.tiendas.find( h => h.idTienda === hospitalId );
+  //     })
+  
+   }
+
+  cargarTiendas() {
+
+    this.copservice.cargarTiendas()
+      .subscribe( (tiendas: Tienda[]) => {
+        this.tiendas = tiendas;
       })
 
   }
 
-  cargarDatosTienda(id: string) {
+  cargarDatosTienda(id: number) {
 
-    if ( id === 'nuevo' ) {
+    if ( id == 0 ) {
       return;
     }
     
@@ -56,6 +65,8 @@ export class TiendaComponent implements OnInit {
         delay(100)
       )
       .subscribe( tienda => {
+
+        console.log(tienda);
 
         if ( !tienda ) {
           return this.router.navigateByUrl(`/dashboard/tiendas`);

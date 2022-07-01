@@ -1,7 +1,7 @@
 export class Tienda {
 
     constructor(
-        public idTienda: string,
+        public idTienda: number,
         public Nombre: string,
         public dot_teo_ft:number,
         public dot_teo_pt:number,

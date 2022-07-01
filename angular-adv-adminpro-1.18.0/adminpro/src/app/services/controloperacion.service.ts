@@ -32,12 +32,12 @@ export class ControloperacionService {
               );
   }
 
-  obtenerTiendaPorId( id: string ) {
-    const url = `${ base_url }/medicos/${ id }`;
-    return this.http.get( url)//, this.headers )
-              .pipe(
-                map( (resp: {ok: boolean, tienda: Tienda }) => resp.tienda )
-              );
+  obtenerTiendaPorId( id: number ) {
+    console.log("test");
+    const url = `${ base_url }/Tienda/TiendaBuscar`;
+    let res =  this.http.post( url,id);//, this.headers );
+    console.log(res);
+    return res;
   }
 
   RegistrarTienda( tienda: { Nombre: string, dot_teo_pt: number,dot_teo_ft:number,jefe_zonal:string,Direccion:string,iddistrito:number } ) {
